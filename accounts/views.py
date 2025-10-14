@@ -28,7 +28,8 @@ def login_view(request):
         form = LoginForm()
     return render(request, "login.html", {"form": form})
 
-
+def home_view(request):
+    return HttpResponse("Welcome to Home page")
 
 @login_required
 def dashboard_view(request):
