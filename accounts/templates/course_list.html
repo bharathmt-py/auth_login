@@ -1,0 +1,8 @@
+{% for course in courses %}
+    <h3>{{ course.title }}</h3>
+    <p>{{ course.description }}</p>
+
+    {% if perms.authproject.change_course %}
+        <a href="{% url 'edit_course' course.id %}">Edit</a>
+    {% endif %}
+{% endfor %}
