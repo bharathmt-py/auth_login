@@ -15,7 +15,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+import os
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -87,7 +87,9 @@ DATABASES = {
         'NAME': 'auth_project',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': 'localhost',  # or your DB server IP
+        # allows Docker container to access your host’s MySQL
+        # 'HOST': 'host.docker.internal',
+        'HOST': os.getenv('DB_HOST', 'localhost'),
         'PORT': '3306',       # default MySQL port
     }
 }
@@ -133,4 +135,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
-LOGIN_URL='/login'
+LOGIN_URL = '/login'
